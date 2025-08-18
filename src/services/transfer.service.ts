@@ -1,5 +1,10 @@
 import { BaseService } from '../base.service';
 import { PaystackModuleOptions } from '../interfaces';
+import {
+  InitializeTransactionResponse,
+  VerifyTransactionResponse,
+  ListTransactionsResponse,
+} from '../interfaces/transaction.interface';
 
 export class TransferService extends BaseService {
   constructor(options: PaystackModuleOptions) {
@@ -13,8 +18,8 @@ export class TransferService extends BaseService {
     reason?: string;
     currency?: string;
     reference?: string;
-  }) {
-    return this.post('/transfer', data);
+  }): Promise<InitializeTransactionResponse | any> {
+    return this.post<InitializeTransactionResponse>('/transfer', data);
   }
 
   async list(params?: {
@@ -24,22 +29,22 @@ export class TransferService extends BaseService {
     status?: string;
     from?: string;
     to?: string;
-  }) {
-    return this.get('/transfer', params);
+  }): Promise<ListTransactionsResponse> {
+    return this.get<ListTransactionsResponse>('/transfer', params);
   }
 
-  async fetch(idOrCode: string | number) {
-    return this.get(`/transfer/${idOrCode}`);
+  async fetch(idOrCode: string | number): Promise<any> {
+    return this.get<any>(`/transfer/${idOrCode}`);
   }
 
   async finalize(data: {
     transfer_code: string;
     otp: string;
-  }) {
-    return this.post('/transfer/finalize_transfer', data);
+  }): Promise<any> {
+    return this.post<any>('/transfer/finalize_transfer', data);
   }
 
-  async verify(reference: string) {
-    return this.get(`/transfer/verify/${reference}`);
+  async verify(reference: string): Promise<VerifyTransactionResponse> {
+    return this.get<VerifyTransactionResponse>(`/transfer/verify/${reference}`);
   }
 }

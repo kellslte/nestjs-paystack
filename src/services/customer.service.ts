@@ -1,6 +1,19 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
-
+import { 
+  CreateCustomerRequest, 
+  CreateCustomerResponse, 
+  DeactivateAuthorizationResponse, 
+  FetchCustomerResponse, 
+  ListCustomersRequest, 
+  ListCustomersResponse, 
+  PaystackModuleOptions, 
+  UpdateCustomerRequest, 
+  UpdateCustomerResponse, 
+  ValidateCustomerResponse, 
+  ValidateCustomerRequest,
+  SetRiskActionRequest,
+  SetRiskActionResponse,
+} from '../interfaces';
 export class CustomerService extends BaseService {
   constructor(options: PaystackModuleOptions) {
     super(options);
@@ -9,89 +22,57 @@ export class CustomerService extends BaseService {
   /**
    * Create a customer
    */
-  async create(data: {
-    email: string;
-    first_name?: string;
-    last_name?: string;
-    phone?: string;
-    metadata?: Record<string, any>;
-  }) {
-    return this.post('/customer', data);
+  async create(data: CreateCustomerRequest): Promise<CreateCustomerResponse | any> {
+    return this.post<CreateCustomerResponse>('/customer', data);
   }
 
   /**
    * List customers
    */
-  async list(params?: {
-    page?: number;
-    perPage?: number;
-    from?: string;
-    to?: string;
-  }) {
-    return this.get('/customer', params);
+  async list(params?: ListCustomersRequest): Promise<ListCustomersResponse | any> {
+    return this.get<ListCustomersResponse>('/customer', params);
   }
 
   /**
    * Fetch a customer
    */
-  async fetch(idOrCode: string | number) {
-    return this.get(`/customer/${idOrCode}`);
+  async fetch(idOrCode: string | number): Promise<FetchCustomerResponse | any> {
+    return this.get<FetchCustomerResponse>(`/customer/${idOrCode}`);
   }
 
   /**
    * Update a customer
    */
-  async update(idOrCode: string | number, data: {
-    first_name?: string;
-    last_name?: string;
-    phone?: string;
-    metadata?: Record<string, any>;
-  }) {
-    return this.put(`/customer/${idOrCode}`, data);
+  async update(idOrCode: string | number, data: UpdateCustomerRequest): Promise<UpdateCustomerResponse | any> {
+    return this.put<UpdateCustomerResponse>(`/customer/${idOrCode}`, data);
   }
 
   /**
    * Validate a customer
    */
-  async validate(idOrCode: string | number, data: {
-    first_name: string;
-    last_name: string;
-    type: 'bank_account' | 'card';
-    value: string;
-    country: string;
-    bvn: string;
-    bank_code: string;
-    account_number: string;
-    account_name: string;
-  }) {
-    return this.post(`/customer/${idOrCode}/identification`, data);
+  async validate(idOrCode: string | number, data: ValidateCustomerRequest): Promise<ValidateCustomerResponse | any> {
+    return this.post<ValidateCustomerResponse>(`/customer/${idOrCode}/identification`, data);
   }
 
   /**
    * Blacklist a customer
    */
-  async blacklist(idOrCode: string | number, data: {
-    customer: string;
-    risk_action: 'deny';
-  }) {
-    return this.post(`/customer/set_risk_action`, data);
+  async blacklist(idOrCode: string | number, data: SetRiskActionRequest): Promise<SetRiskActionResponse> {
+    return this.post<SetRiskActionResponse>(`/customer/set_risk_action`, data);
   }
 
   /**
    * Whitelist a customer
    */
-  async whitelist(idOrCode: string | number, data: {
-    customer: string;
-    risk_action: 'allow';
-  }) {
-    return this.post(`/customer/set_risk_action`, data);
+  async whitelist(idOrCode: string | number, data: SetRiskActionRequest): Promise<SetRiskActionResponse> {
+    return this.post<SetRiskActionResponse>(`/customer/set_risk_action`, data);
   }
 
   /**
    * Deactivate authorization
    */
-  async deactivateAuthorization(authorizationCode: string) {
-    return this.post('/customer/deactivate_authorization', {
+  async deactivateAuthorization(authorizationCode: string): Promise<DeactivateAuthorizationResponse | any> {
+    return this.post<DeactivateAuthorizationResponse>('/customer/deactivate_authorization', {
       authorization_code: authorizationCode,
     });
   }

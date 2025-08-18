@@ -1,56 +1,38 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
+import {
+    CheckSlugAvailabilityResponse,
+    CreatePageRequest,
+    CreatePageResponse,
+    FetchPageResponse,
+    ListPagesRequest,
+    ListPagesResponse,
+    PaystackModuleOptions,
+    UpdatePageRequest,
+    UpdatePageResponse
+} from '../interfaces';
 
 export class PageService extends BaseService {
     constructor(options: PaystackModuleOptions) {
         super(options);
     }
 
-    async create(data: {
-        name: string;
-        description?: string;
-        amount?: number;
-        slug?: string;
-        redirect_url?: string;
-        custom_fields?: Array<{
-            display_name: string;
-            variable_name: string;
-            value: string;
-        }>;
-        metadata?: Record<string, any>;
-    }) {
-        return this.post('/page', data);
+    async create(data: CreatePageRequest): Promise<CreatePageResponse | any> {
+        return this.post<CreatePageResponse>('/page', data);
     }
 
-    async list(params?: {
-        page?: number;
-        perPage?: number;
-        active?: boolean;
-    }) {
-        return this.get('/page', params);
+    async list(params?: ListPagesRequest): Promise<ListPagesResponse | any> {
+        return this.get<ListPagesResponse>('/page', params);
     }
 
-    async fetch(idOrSlug: string | number) {
-        return this.get(`/page/${idOrSlug}`);
+    async fetch(idOrSlug: string | number): Promise<FetchPageResponse | any> {
+        return this.get<FetchPageResponse>(`/page/${idOrSlug}`);
     }
 
-    async update(idOrSlug: string | number, data: {
-        name?: string;
-        description?: string;
-        amount?: number;
-        active?: boolean;
-        redirect_url?: string;
-        custom_fields?: Array<{
-            display_name: string;
-            variable_name: string;
-            value: string;
-        }>;
-        metadata?: Record<string, any>;
-    }) {
-        return this.put(`/page/${idOrSlug}`, data);
+    async update(idOrSlug: string | number, data: UpdatePageRequest): Promise<UpdatePageResponse | any> {
+        return this.put<UpdatePageResponse>(`/page/${idOrSlug}`, data);
     }
 
-    async checkSlug(slug: string) {
-        return this.get(`/page/check_slug_availability/${slug}`);
+    async checkSlug(slug: string): Promise<CheckSlugAvailabilityResponse | any> {
+        return this.get<CheckSlugAvailabilityResponse>(`/page/check_slug_availability/${slug}`);
     }
 }

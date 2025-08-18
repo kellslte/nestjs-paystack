@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PaystackError } from './errors/paystack.error';
-import { HttpRequestOptions, HttpResponse, HttpError, RetryOptions } from './interfaces';
+import {
+    HttpError,
+    HttpRequestOptions,
+    HttpResponse,
+    RetryOptions
+} from './interfaces';
 
 @Injectable()
 export class HttpClient {
@@ -58,7 +63,7 @@ export class HttpClient {
 
             if (!response.ok) {
                 throw new PaystackError(
-                    responseData.message || `HTTP ${response.status}`,
+                    (responseData as any)?.message || `HTTP ${response.status}`,
                     response.status,
                     this.getErrorCode(response.status),
                     responseData
@@ -96,7 +101,7 @@ export class HttpClient {
 
         if (contentType && contentType.includes('application/json')) {
             try {
-                return await response.json();
+                return await response.json() as T;
             } catch {
                 return {} as T;
             }

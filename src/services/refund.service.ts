@@ -1,32 +1,27 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
+import { 
+  CreateRefundRequest, 
+  CreateRefundResponse, 
+  FetchRefundResponse, 
+  ListRefundsRequest, 
+  ListRefundsResponse, 
+  PaystackModuleOptions 
+} from '../interfaces';
 
 export class RefundService extends BaseService {
   constructor(options: PaystackModuleOptions) {
     super(options);
   }
 
-  async create(data: {
-    transaction: string;
-    amount?: number;
-    currency?: string;
-    customer_note?: string;
-    merchant_note?: string;
-  }) {
-    return this.post('/refund', data);
+  async create(data: CreateRefundRequest): Promise<CreateRefundResponse | any> {
+    return this.post<CreateRefundResponse>('/refund', data);
   }
 
-  async list(params?: {
-    page?: number;
-    perPage?: number;
-    from?: string;
-    to?: string;
-    reference?: string;
-  }) {
-    return this.get('/refund', params);
+  async list(params?: ListRefundsRequest): Promise<ListRefundsResponse | any> {
+    return this.get<ListRefundsResponse>('/refund', params);
   }
 
-  async fetch(id: number) {
-    return this.get(`/refund/${id}`);
+  async fetch(id: number): Promise<FetchRefundResponse | any> {
+    return this.get<FetchRefundResponse>(`/refund/${id}`);
   }
 }

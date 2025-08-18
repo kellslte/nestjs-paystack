@@ -1,21 +1,21 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
+import {
+  FetchSettlementResponse,
+  ListSettlementsRequest,
+  ListSettlementsResponse,
+  PaystackModuleOptions
+} from '../interfaces';
 
 export class SettlementService extends BaseService {
   constructor(options: PaystackModuleOptions) {
     super(options);
   }
 
-  async list(params?: {
-    page?: number;
-    perPage?: number;
-    from?: string;
-    to?: string;
-  }) {
-    return this.get('/settlement', params);
+  async list(params?: ListSettlementsRequest): Promise<ListSettlementsResponse | any> {
+    return this.get<ListSettlementsResponse>('/settlement', params);
   }
 
-  async fetch(id: number) {
-    return this.get(`/settlement/${id}`);
+  async fetch(id: number): Promise<FetchSettlementResponse | any> {
+    return this.get<FetchSettlementResponse>(`/settlement/${id}`);
   }
 }

@@ -1,3 +1,4 @@
+import { CheckBalanceResponse, ListLedgerRequest, ListLedgerResponse } from 'src/interfaces/balance.interface';
 import { BaseService } from '../base.service';
 import { PaystackModuleOptions } from '../interfaces';
 
@@ -6,16 +7,11 @@ export class BalanceService extends BaseService {
         super(options);
     }
 
-    async check() {
-        return this.get('/balance');
+    async check(): Promise<CheckBalanceResponse | any> {
+        return this.get<CheckBalanceResponse>('/balance');
     }
 
-    async listLedger(params?: {
-        page?: number;
-        perPage?: number;
-        from?: string;
-        to?: string;
-    }) {
-        return this.get('/balance/ledger', params);
+    async listLedger(params?: ListLedgerRequest): Promise<ListLedgerResponse | any> {
+        return this.get<ListLedgerResponse>('/balance/ledger', params);
     }
 }

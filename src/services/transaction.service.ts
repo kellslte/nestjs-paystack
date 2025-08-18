@@ -1,3 +1,14 @@
+import {
+  InitializeTransactionResponse,
+  ListTransactionsResponse,
+  FetchTransactionResponse,
+  VerifyTransactionResponse,
+  ChargeAuthorizationResponse,
+  CheckAuthorizationResponse,
+  ExportTransactionsResponse,
+  RequestReauthorizationResponse,
+  SendTransactionReceiptResponse,
+} from 'src/interfaces/transaction.interface';
 import { BaseService } from '../base.service';
 import { PaystackModuleOptions } from '../interfaces';
 
@@ -23,15 +34,15 @@ export class TransactionService extends BaseService {
     transaction_charge?: number;
     bearer?: 'account' | 'subaccount';
     metadata?: Record<string, any>;
-  }) {
+  }): Promise<InitializeTransactionResponse> {
     return this.post('/transaction/initialize', data);
   }
 
   /**
    * Verify a transaction
    */
-  async verify(reference: string) {
-    return this.get(`/transaction/verify/${reference}`);
+  async verify(reference: string): Promise<VerifyTransactionResponse | any> {
+    return this.get<VerifyTransactionResponse>(`/transaction/verify/${reference}`);
   }
 
   /**
@@ -45,15 +56,15 @@ export class TransactionService extends BaseService {
     from?: string;
     to?: string;
     amount?: number;
-  }) {
-    return this.get('/transaction', params);
+  }): Promise<ListTransactionsResponse | any> {
+    return this.get<ListTransactionsResponse>('/transaction', params);
   }
 
   /**
    * Fetch a transaction
    */
-  async fetch(id: number) {
-    return this.get(`/transaction/${id}`);
+  async fetch(id: number): Promise<FetchTransactionResponse | any> {
+    return this.get<FetchTransactionResponse>(`/transaction/${id}`);
   }
 
   /**
@@ -66,8 +77,8 @@ export class TransactionService extends BaseService {
     reference?: string;
     currency?: string;
     metadata?: Record<string, any>;
-  }) {
-    return this.post('/transaction/charge_authorization', data);
+  }): Promise<ChargeAuthorizationResponse | any> {
+    return this.post<ChargeAuthorizationResponse>('/transaction/charge_authorization', data);
   }
 
   /**
@@ -78,8 +89,8 @@ export class TransactionService extends BaseService {
     amount: number;
     email: string;
     currency?: string;
-  }) {
-    return this.post('/transaction/check_authorization', data);
+  }): Promise<CheckAuthorizationResponse | any> {
+    return this.post<CheckAuthorizationResponse>('/transaction/check_authorization', data);
   }
 
   /**
@@ -90,8 +101,8 @@ export class TransactionService extends BaseService {
     to?: string;
     settled?: boolean;
     payment_page?: number;
-  }) {
-    return this.get('/transaction/export', params);
+  }): Promise<ExportTransactionsResponse | any> {
+    return this.get<ExportTransactionsResponse>('/transaction/export', params);
   }
 
   /**
@@ -104,8 +115,8 @@ export class TransactionService extends BaseService {
     currency?: string;
     reference?: string;
     metadata?: Record<string, any>;
-  }) {
-    return this.post('/transaction/request_reauthorization', data);
+  }): Promise<RequestReauthorizationResponse | any> {
+    return this.post<RequestReauthorizationResponse>('/transaction/request_reauthorization', data);
   }
 
   /**
@@ -114,7 +125,7 @@ export class TransactionService extends BaseService {
   async sendReceipt(data: {
     email: string;
     transaction_id: number;
-  }) {
-    return this.post('/transaction/send_receipt', data);
+  }): Promise<SendTransactionReceiptResponse | any> {
+    return this.post<SendTransactionReceiptResponse>('/transaction/send_receipt', data);
   }
 }

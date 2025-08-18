@@ -1,60 +1,45 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
+import { 
+  CreateSplitRequest, 
+  CreateSplitResponse, 
+  FetchSplitResponse, 
+  ListSplitsRequest, 
+  ListSplitsResponse, 
+  PaystackModuleOptions,
+  UpdateSplitRequest,
+  UpdateSplitResponse,
+  AddSubaccountToSplitRequest,
+  AddSubaccountToSplitResponse,
+  RemoveSubaccountFromSplitRequest,
+  RemoveSubaccountFromSplitResponse
+} from '../interfaces';
 
 export class SplitService extends BaseService {
   constructor(options: PaystackModuleOptions) {
     super(options);
   }
 
-  async create(data: {
-    name: string;
-    type: 'flat' | 'percentage';
-    currency: string;
-    subaccounts: Array<{
-      subaccount: string;
-      share: number;
-    }>;
-    bearer_type: 'account' | 'subaccount';
-    bearer_subaccount?: string;
-  }) {
-    return this.post('/split', data);
+  async create(data: CreateSplitRequest): Promise<CreateSplitResponse | any> {
+    return this.post<CreateSplitResponse>('/split', data);
   }
 
-  async list(params?: {
-    page?: number;
-    perPage?: number;
-    active?: boolean;
-  }) {
-    return this.get('/split', params);
+  async list(params?: ListSplitsRequest): Promise<ListSplitsResponse | any> {
+    return this.get<ListSplitsResponse>('/split', params);
   }
 
-  async fetch(idOrCode: string | number) {
-    return this.get(`/split/${idOrCode}`);
+  async fetch(idOrCode: string | number): Promise<FetchSplitResponse | any> {
+    return this.get<FetchSplitResponse>(`/split/${idOrCode}`);
   }
 
-  async update(idOrCode: string | number, data: {
-    name?: string;
-    active?: boolean;
-    subaccounts?: Array<{
-      subaccount: string;
-      share: number;
-    }>;
-    bearer_type?: 'account' | 'subaccount';
-    bearer_subaccount?: string;
-  }) {
-    return this.put(`/split/${idOrCode}`, data);
+  async update(idOrCode: string | number, data: UpdateSplitRequest): Promise<UpdateSplitResponse | any> {
+    return this.put<UpdateSplitResponse>(`/split/${idOrCode}`, data);
   }
 
-  async addSubaccount(idOrCode: string | number, data: {
-    subaccount: string;
-    share: number;
-  }) {
-    return this.post(`/split/${idOrCode}/subaccount/add`, data);
+  async addSubaccount(idOrCode: string | number, data: AddSubaccountToSplitRequest): Promise<AddSubaccountToSplitResponse | any> {
+    return this.post<AddSubaccountToSplitResponse>(`/split/${idOrCode}/subaccount/add`, data);
   }
 
-  async removeSubaccount(idOrCode: string | number, data: {
-    subaccount: string;
-  }) {
-    return this.post(`/split/${idOrCode}/subaccount/remove`, data);
+  async removeSubaccount(idOrCode: string | number, data: RemoveSubaccountFromSplitRequest): Promise<RemoveSubaccountFromSplitResponse | any> {
+    return this.post<RemoveSubaccountFromSplitResponse>(`/split/${idOrCode}/subaccount/remove`, data);
   }
 }

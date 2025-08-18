@@ -1,7 +1,7 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { PaystackService } from './paystack.service';
 import { PAYSTACK_MODULE_OPTIONS } from './constants';
 import { PaystackModuleOptions } from './interfaces';
+import { PaystackService } from './paystack.service';
 
 @Module({})
 export class PaystackModule {

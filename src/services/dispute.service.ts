@@ -1,51 +1,39 @@
 import { BaseService } from '../base.service';
-import { PaystackModuleOptions } from '../interfaces';
+import { 
+  AddEvidenceRequest, 
+  AddEvidenceResponse, 
+  FetchDisputeResponse, 
+  ListDisputesRequest, 
+  ListDisputesResponse, 
+  PaystackModuleOptions, 
+  UpdateDisputeRequest, 
+  UpdateDisputeResponse,
+  UploadEvidenceRequest,
+  UploadEvidenceResponse,
+} from '../interfaces';
 
 export class DisputeService extends BaseService {
   constructor(options: PaystackModuleOptions) {
     super(options);
   }
 
-  async list(params?: {
-    page?: number;
-    perPage?: number;
-    from?: string;
-    to?: string;
-    status?: string;
-    transaction?: number;
-  }) {
-    return this.get('/dispute', params);
+  async list(params?: ListDisputesRequest): Promise<ListDisputesResponse | any> {
+    return this.get<ListDisputesResponse>('/dispute', params);
   }
 
-  async fetch(id: number) {
-    return this.get(`/dispute/${id}`);
+  async fetch(id: number): Promise<FetchDisputeResponse | any> {
+    return this.get<FetchDisputeResponse>(`/dispute/${id}`);
   }
 
-  async update(id: number, data: {
-    refund_amount: number;
-    resolution: 'merchant-accepted' | 'declined';
-    reason: string;
-  }) {
-    return this.put(`/dispute/${id}`, data);
+  async update(id: number, data: UpdateDisputeRequest): Promise<UpdateDisputeResponse | any> {
+    return this.put<UpdateDisputeResponse>(`/dispute/${id}`, data);
   }
 
-  async addEvidence(id: number, data: {
-    customer_email: string;
-    customer_name: string;
-    customer_phone: string;
-    service_details: string;
-    delivery_address?: string;
-    delivery_date?: string;
-    delivery_confirmation?: string;
-    customer_signature?: string;
-  }) {
-    return this.post(`/dispute/${id}/evidence`, data);
+  async addEvidence(id: number, data: AddEvidenceRequest): Promise<AddEvidenceResponse | any> {
+    return this.post<AddEvidenceResponse>(`/dispute/${id}/evidence`, data);
   }
 
-  async uploadEvidence(id: number, data: {
-    filename: string;
-    url: string;
-  }) {
-    return this.post(`/dispute/${id}/evidence/upload`, data);
+  async uploadEvidence(id: number, data: UploadEvidenceRequest): Promise<UploadEvidenceResponse | any> {
+    return this.post<UploadEvidenceResponse>(`/dispute/${id}/evidence/upload`, data);
   }
 }

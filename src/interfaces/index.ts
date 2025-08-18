@@ -1,5 +1,7 @@
 // Module configuration interfaces
 export * from './module.interface';
+
+// HTTP request/response interfaces
 export * from './http.interface';
 
 // API request/response interfaces
@@ -12,9 +14,8 @@ export * from './split.interface';
 export * from './settlement.interface';
 export * from './transfer.interface';
 export * from './transfer-recipient.interface';
-export * from './balance.interface';
 export * from './bank.interface';
-export * from './charge.interface';
 export * from './dispute.interface';
 export * from './refund.interface';
 export * from './verification.interface';
+export * from './balance.interface';        
