@@ -138,14 +138,11 @@ jobs:
             echo "commits_since_tag=0" >> $GITHUB_OUTPUT
           fi
 
-      - name: Comment on PR if release needed
-        if: steps.check-release.outputs.needs_release == 'true'
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 **Release needed!** There are ${context.steps.check-release.outputs.commits_since_tag} commits since the last tag. Consider creating a new release.`
-            })
+      - name: Log release status
+        run: |
+          if [ "${{ steps.check-release.outputs.needs_release }}" = "true" ]; then
+            echo "🚀 Release needed! There are ${{ steps.check-release.outputs.commits_since_tag }} commits since the last tag."
+            echo "Consider creating a new release using: npm run release:auto"
+          else
+            echo "✅ No release needed at this time."
+          fi
