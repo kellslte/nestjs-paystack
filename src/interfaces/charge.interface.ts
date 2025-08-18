@@ -36,7 +36,6 @@ export interface CreateChargeResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;
@@ -95,7 +94,6 @@ export interface SubmitPinResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;
@@ -154,7 +152,6 @@ export interface SubmitOtpResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;
@@ -213,7 +210,6 @@ export interface SubmitPhoneResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;
@@ -272,7 +268,6 @@ export interface SubmitBirthdayResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;
@@ -330,7 +325,6 @@ export interface CheckPendingChargeResponse {
         transaction_date: string;
         status: string;
         reference: string;
-        domain: string;
         metadata: Record<string, any> | null;
         gateway_response: string;
         message: string | null;

@@ -17,7 +17,6 @@ export interface ListSettlementsResponse {
         status: string;
         settlement_date: string;
         integration: number;
-        domain: string;
         created_at: string;
         updated_at: string;
     }>;
@@ -47,7 +46,6 @@ export interface FetchSettlementResponse {
         status: string;
         settlement_date: string;
         integration: number;
-        domain: string;
         created_at: string;
         updated_at: string;
     };
