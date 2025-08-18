@@ -1,6 +1,6 @@
 {
   "name": "@nestjs/paystack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive NestJS module for integrating with Paystack API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -77,9 +77,12 @@
     "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": ["ts-jest", {
-        "tsconfig": "tsconfig.test.json"
-      }]
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.test.json"
+        }
+      ]
     },
     "collectCoverageFrom": [
       "src/**/*.(t|j)s"
