@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-paystack",
+  "name": "@scwar/nestjs-paystack",
   "version": "1.0.1",
   "description": "A comprehensive NestJS module for integrating with Paystack API",
   "main": "dist/index.js",
@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kellslte/nestjs-paystack.git"
+    "url": "git+https://github.com/kellslte/nestjs-paystack.git"
   },
   "bugs": {
     "url": "https://github.com/kellslte/nestjs-paystack/issues"
