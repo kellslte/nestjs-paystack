@@ -1,0 +1,65 @@
+{
+  "types": [
+    {
+      "type": "feat",
+      "section": "Features",
+      "description": "New features"
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fixes",
+      "description": "Bug fixes"
+    },
+    {
+      "type": "perf",
+      "section": "Performance",
+      "description": "Performance improvements"
+    },
+    {
+      "type": "refactor",
+      "section": "Refactor",
+      "description": "Code refactoring"
+    },
+    {
+      "type": "style",
+      "section": "Style",
+      "description": "Code style changes"
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "description": "Test additions and updates"
+    },
+    {
+      "type": "docs",
+      "section": "Documentation",
+      "description": "Documentation updates"
+    },
+    {
+      "type": "chore",
+      "section": "Chores",
+      "description": "Maintenance tasks"
+    },
+    {
+      "type": "ci",
+      "section": "CI/CD",
+      "description": "CI/CD changes"
+    },
+    {
+      "type": "build",
+      "section": "Build",
+      "description": "Build system changes"
+    },
+    {
+      "type": "revert",
+      "section": "Reverts",
+      "description": "Reverted changes"
+    }
+  ],
+  "releaseCommitMessageFormat": "chore(release): bump version to {{currentTag}}",
+  "issuePrefixes": ["#"],
+  "commitUrlFormat": "{{host}}/{{owner}}/{{repository}}/commit/{{hash}}",
+  "compareUrlFormat": "{{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "{{host}}/{{owner}}/{{repository}}/issues/{{id}}",
+  "userUrlFormat": "{{host}}/{{user}}"
+}

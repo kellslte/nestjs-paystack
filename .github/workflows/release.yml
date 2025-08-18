@@ -1,0 +1,173 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build package
+        run: npm run build
+
+      - name: Determine version bump type
+        id: version-bump
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "bump_type=${{ github.event.inputs.version_type }}" >> $GITHUB_OUTPUT
+          else
+            # Analyze commits since last tag
+            LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            if [ -n "$LAST_TAG" ]; then
+              COMMITS=$(git log $LAST_TAG..HEAD --oneline --format="%s")
+            else
+              COMMITS=$(git log --oneline --format="%s" | head -10)
+            fi
+            
+            # Check for breaking changes
+            if echo "$COMMITS" | grep -q "!:"; then
+              echo "bump_type=major" >> $GITHUB_OUTPUT
+            elif echo "$COMMITS" | grep -q "^feat:"; then
+              echo "bump_type=minor" >> $GITHUB_OUTPUT
+            else
+              echo "bump_type=patch" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Bump version
+        run: |
+          npm run version:${{ steps.version-bump.outputs.bump_type }}
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Update changelog
+        run: npm run changelog:update
+
+      - name: Commit version bump
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "chore: bump version to ${{ env.NEW_VERSION }} [skip ci]"
+
+      - name: Create and push tag
+        run: |
+          git tag "v${{ env.NEW_VERSION }}"
+          git push origin HEAD:${{ github.ref }}
+          git push origin "v${{ env.NEW_VERSION }}"
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.NEW_VERSION }}
+          release_name: Release v${{ env.NEW_VERSION }}
+          body: |
+            ## What's Changed
+
+            This release includes the following changes:
+
+            ${{ steps.changelog.outputs.changelog }}
+
+            ## Installation
+
+            ```bash
+            npm install @nestjs/paystack@${{ env.NEW_VERSION }}
+            ```
+
+            ## Breaking Changes
+
+            ${{ steps.breaking-changes.outputs.breaking_changes }}
+
+            ## Features
+
+            ${{ steps.features.outputs.features }}
+
+            ## Bug Fixes
+
+            ${{ steps.bug-fixes.outputs.bug_fixes }}
+          draft: false
+          prerelease: false
+
+      - name: Extract changelog
+        id: changelog
+        run: |
+          # Extract the latest changelog entry
+          CHANGELOG=$(awk '/^## \['${{ env.NEW_VERSION }}'\]/{p=1;next}/^## \[/{p=0}p' CHANGELOG.md | sed '1d')
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Extract breaking changes
+        id: breaking-changes
+        run: |
+          if grep -A 10 "### Breaking Changes" CHANGELOG.md | grep -q "^-"; then
+            BREAKING=$(awk '/^### Breaking Changes/{p=1;next}/^###/{p=0}p' CHANGELOG.md | grep "^-" | head -5)
+            echo "breaking_changes<<EOF" >> $GITHUB_OUTPUT
+            echo "$BREAKING" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "breaking_changes=No breaking changes in this release." >> $GITHUB_OUTPUT
+          fi
+
+      - name: Extract features
+        id: features
+        run: |
+          if grep -A 10 "### Features" CHANGELOG.md | grep -q "^-"; then
+            FEATURES=$(awk '/^### Features/{p=1;next}/^###/{p=0}p' CHANGELOG.md | grep "^-" | head -5)
+            echo "features<<EOF" >> $GITHUB_OUTPUT
+            echo "$FEATURES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "features=No new features in this release." >> $GITHUB_OUTPUT
+          fi
+
+      - name: Extract bug fixes
+        id: bug-fixes
+        run: |
+          if grep -A 10 "### Bug Fixes" CHANGELOG.md | grep -q "^-"; then
+            FIXES=$(awk '/^### Bug Fixes/{p=1;next}/^###/{p=0}p' CHANGELOG.md | grep "^-" | head -5)
+            echo "bug-fixes<<EOF" >> $GITHUB_OUTPUT
+            echo "$FIXES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "bug-fixes=No bug fixes in this release." >> $GITHUB_OUTPUT
+          fi

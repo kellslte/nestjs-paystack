@@ -212,13 +212,115 @@ npm run test:watch
 npm run test:cov
 ```
 
+## Version Management & Releases
+
+This package includes an automated version bumping system that follows semantic versioning and conventional commits.
+
+### Automatic Version Bumping
+
+The system automatically determines the appropriate version bump based on your commits:
+
+```bash
+# Automatically determine and bump version
+npm run version:auto
+
+# Manual version bumps
+npm run version:patch  # 1.0.0 → 1.0.1
+npm run version:minor  # 1.0.0 → 1.1.0
+npm run version:major  # 1.0.0 → 2.0.0
+```
+
+### Conventional Commits
+
+All commits must follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+```bash
+# Feature commits (minor version bump)
+git commit -m "feat: add new payment method"
+
+# Bug fix commits (patch version bump)
+git commit -m "fix: resolve authentication issue"
+
+# Breaking change commits (major version bump)
+git commit -m "feat!: breaking change in API"
+
+# Documentation commits (no version bump)
+git commit -m "docs: update README with examples"
+
+# Test commits (no version bump)
+git commit -m "test: add unit tests for payment service"
+```
+
+### Release Process
+
+#### Automated Release (Recommended)
+```bash
+# Complete release process with automatic version bump
+npm run release:auto
+
+# Manual release with specific version bump
+npm run release:patch
+npm run release:minor
+npm run release:major
+```
+
+#### Manual Release Steps
+```bash
+# 1. Bump version and update changelog
+npm run version:auto
+
+# 2. Build and test
+npm run build && npm test
+
+# 3. Commit changes
+git add .
+git commit -m "chore: bump version to $(node -p \"require('./package.json').version\")"
+
+# 4. Create tag
+git tag "v$(node -p \"require('./package.json').version\")"
+
+# 5. Push changes and tag
+git push && git push --tags
+
+# 6. Publish to npm
+npm publish
+```
+
+### Changelog Management
+
+The changelog is automatically updated with each version bump:
+
+```bash
+# Update changelog with recent changes
+npm run changelog:update
+
+# Generate full changelog from git history
+npm run changelog:generate -- --full
+```
+
+### GitHub Actions
+
+The package includes GitHub Actions workflows for:
+- **CI**: Automated testing, linting, and quality checks
+- **Release**: Automated version bumping, changelog updates, and npm publishing
+- **Security**: Dependency audits and vulnerability checks
+
+### Git Hooks
+
+Pre-commit hooks ensure code quality:
+- Linting and formatting checks
+- Test execution
+- Conventional commit message validation
+
 ## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+3. Commit your changes using conventional commit format
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+**Important**: All commits must follow the conventional commit format to ensure proper version bumping.
 
 ## License
 
