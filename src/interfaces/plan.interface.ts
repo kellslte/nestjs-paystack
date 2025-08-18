@@ -106,21 +106,18 @@ export interface FetchPlanResponse {
 }
 
 export interface UpdatePlanRequest {
-    idOrCode: string | number;
-    data: {
-        name?: string;
-        amount?: number;
-        interval?: 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'biannually' | 'annually';
-        description?: string;
-        send_invoices?: boolean;
-        send_sms?: boolean;
-        hosted_page?: boolean;
-        hosted_page_url?: string;
-        hosted_page_summary?: string;
-        currency?: string;
-        invoice_limit?: number;
-        metadata?: Record<string, any>;
-    };
+    name?: string;
+    amount?: number;
+    interval?: 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'biannually' | 'annually';
+    description?: string;
+    send_invoices?: boolean;
+    send_sms?: boolean;
+    hosted_page?: boolean;
+    hosted_page_url?: string;
+    hosted_page_summary?: string;
+    currency?: string;
+    invoice_limit?: number;
+    metadata?: Record<string, any>;
 }
 
 export interface UpdatePlanResponse {

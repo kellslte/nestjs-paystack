@@ -90,12 +90,9 @@ export interface FetchTransferRecipientResponse {
 }
 
 export interface UpdateTransferRecipientRequest {
-    idOrCode: string | number;
-    data: {
-        name?: string;
-        email?: string;
-        metadata?: Record<string, any>;
-    };
+    name?: string;
+    email?: string;
+    metadata?: Record<string, any>;
 }
 
 export interface UpdateTransferRecipientResponse {

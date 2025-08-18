@@ -32,7 +32,7 @@ export class TransferRecipientService extends BaseService {
     return this.put<UpdateTransferRecipientResponse>(`/transferrecipient/${idOrCode}`, data);
   }
 
-  async delete(idOrCode: string | number): Promise<DeleteTransferRecipientResponse | any> {
-    return this.delete(`/transferrecipient/${idOrCode}`);
+  async remove(idOrCode: string | number): Promise<DeleteTransferRecipientResponse | any> {
+    return this.delete<DeleteTransferRecipientResponse>(`/transferrecipient/${idOrCode}`);
   }
 }

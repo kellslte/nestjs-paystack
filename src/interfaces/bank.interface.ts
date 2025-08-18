@@ -37,7 +37,6 @@ export interface ListBanksResponse {
 }
 
 export interface ListBankBranchesRequest {
-    bankId: number;
     page?: number;
     perPage?: number;
 }

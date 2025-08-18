@@ -78,12 +78,9 @@ export interface FetchDisputeResponse {
 }
 
 export interface UpdateDisputeRequest {
-    id: number;
-    data: {
-        refund_amount: number;
-        resolution: 'merchant-accepted' | 'declined';
-        reason: string;
-    };
+    refund_amount: number;
+    resolution: 'merchant-accepted' | 'declined';
+    reason: string;
 }
 
 export interface UpdateDisputeResponse {
@@ -116,17 +113,14 @@ export interface UpdateDisputeResponse {
 }
 
 export interface AddEvidenceRequest {
-    id: number;
-    data: {
-        customer_email: string;
-        customer_name: string;
-        customer_phone: string;
-        service_details: string;
-        delivery_address?: string;
-        delivery_date?: string;
-        delivery_confirmation?: string;
-        customer_signature?: string;
-    };
+    customer_email: string;
+    customer_name: string;
+    customer_phone: string;
+    service_details: string;
+    delivery_address?: string;
+    delivery_date?: string;
+    delivery_confirmation?: string;
+    customer_signature?: string;
 }
 
 export interface AddEvidenceResponse {
@@ -159,11 +153,8 @@ export interface AddEvidenceResponse {
 }
 
 export interface UploadEvidenceRequest {
-    id: number;
-    data: {
-        filename: string;
-        url: string;
-    };
+    filename: string;
+    url: string;
 }
 
 export interface UploadEvidenceResponse {

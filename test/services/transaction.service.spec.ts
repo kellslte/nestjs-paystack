@@ -1,4 +1,4 @@
-import { TransactionService } from '../src/services/transaction.service';
+import { TransactionService } from '../../src/services/transaction.service';
 
 describe('TransactionService', () => {
   let service: TransactionService;

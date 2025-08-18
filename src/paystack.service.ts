@@ -15,6 +15,7 @@ import { TransferRecipientService } from './services/transfer-recipient.service'
 import { SubscriptionService } from './services/subscription.service';
 import { SplitService } from './services/split.service';
 import { SettlementService } from './services/settlement.service';
+import { PlanService } from './services/plan.service';
 
 @Injectable()
 export class PaystackService {
@@ -32,6 +33,7 @@ export class PaystackService {
   public readonly subscription: SubscriptionService;
   public readonly split: SplitService;
   public readonly settlement: SettlementService;
+  public readonly plan: PlanService;
 
   constructor(
     @Inject(PAYSTACK_MODULE_OPTIONS) private readonly options: PaystackModuleOptions,
@@ -50,6 +52,7 @@ export class PaystackService {
     this.subscription = new SubscriptionService(this.options);
     this.split = new SplitService(this.options);
     this.settlement = new SettlementService(this.options);
+    this.plan = new PlanService(this.options);
   }
 
   /**

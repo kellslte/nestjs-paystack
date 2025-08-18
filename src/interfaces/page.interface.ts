@@ -106,20 +106,17 @@ export interface FetchPageResponse {
 }
 
 export interface UpdatePageRequest {
-    idOrSlug: string | number;
-    data: {
-        name?: string;
-        description?: string;
-        amount?: number;
-        active?: boolean;
-        redirect_url?: string;
-        custom_fields?: Array<{
-            display_name: string;
-            variable_name: string;
-            value: string;
-        }>;
-        metadata?: Record<string, any>;
-    };
+    name?: string;
+    description?: string;
+    amount?: number;
+    active?: boolean;
+    redirect_url?: string;
+    custom_fields?: Array<{
+        display_name: string;
+        variable_name: string;
+        value: string;
+    }>;
+    metadata?: Record<string, any>;
 }
 
 export interface UpdatePageResponse {

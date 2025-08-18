@@ -83,13 +83,10 @@ export interface FetchCustomerResponse {
 }
 
 export interface UpdateCustomerRequest {
-    idOrCode: string | number;
-    data: {
-        first_name?: string;
-        last_name?: string;
-        phone?: string;
-        metadata?: Record<string, any>;
-    };
+    first_name?: string;
+    last_name?: string;
+    phone?: string;
+    metadata?: Record<string, any>;
 }
 
 export interface UpdateCustomerResponse {
@@ -112,18 +109,15 @@ export interface UpdateCustomerResponse {
 }
 
 export interface ValidateCustomerRequest {
-    idOrCode: string | number;
-    data: {
-        first_name: string;
-        last_name: string;
-        type: 'bank_account' | 'card';
-        value: string;
-        country: string;
-        bvn: string;
-        bank_code: string;
-        account_number: string;
-        account_name: string;
-    };
+    first_name: string;
+    last_name: string;
+    type: 'bank_account' | 'card';
+    value: string;
+    country: string;
+    bvn: string;
+    bank_code: string;
+    account_number: string;
+    account_name: string;
 }
 
 export interface ValidateCustomerResponse {
@@ -146,11 +140,8 @@ export interface ValidateCustomerResponse {
 }
 
 export interface SetRiskActionRequest {
-    idOrCode: string | number;
-    data: {
-        customer: string;
-        risk_action: 'allow' | 'deny';
-    };
+    customer: string;
+    risk_action: 'allow' | 'deny';
 }
 
 export interface SetRiskActionResponse {

@@ -113,17 +113,14 @@ export interface FetchSplitResponse {
 }
 
 export interface UpdateSplitRequest {
-    idOrCode: string | number;
-    data: {
-        name?: string;
-        active?: boolean;
-        subaccounts?: Array<{
-            subaccount: string;
-            share: number;
-        }>;
-        bearer_type?: 'account' | 'subaccount';
-        bearer_subaccount?: string;
-    };
+    name?: string;
+    active?: boolean;
+    subaccounts?: Array<{
+        subaccount: string;
+        share: number;
+    }>;
+    bearer_type?: 'account' | 'subaccount';
+    bearer_subaccount?: string;
 }
 
 export interface UpdateSplitResponse {
@@ -155,11 +152,8 @@ export interface UpdateSplitResponse {
 }
 
 export interface AddSubaccountToSplitRequest {
-    idOrCode: string | number;
-    data: {
-        subaccount: string;
-        share: number;
-    };
+    subaccount: string;
+    share: number;
 }
 
 export interface AddSubaccountToSplitResponse {
@@ -191,10 +185,7 @@ export interface AddSubaccountToSplitResponse {
 }
 
 export interface RemoveSubaccountFromSplitRequest {
-    idOrCode: string | number;
-    data: {
-        subaccount: string;
-    };
+    subaccount: string;
 }
 
 export interface RemoveSubaccountFromSplitResponse {

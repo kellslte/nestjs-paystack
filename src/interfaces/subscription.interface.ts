@@ -85,11 +85,8 @@ export interface FetchSubscriptionResponse {
 }
 
 export interface ActivateSubscriptionRequest {
-    idOrCode: string | number;
-    data: {
-        code: string;
-        token: string;
-    };
+    code: string;
+    token: string;
 }
 
 export interface ActivateSubscriptionResponse {
