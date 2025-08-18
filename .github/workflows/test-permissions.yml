@@ -1,0 +1,52 @@
+name: Test Permissions
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  test-permissions:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Test Git operations
+        run: |
+          echo "Testing Git permissions..."
+          echo "Current branch: $(git branch --show-current)"
+          echo "Remote origin: $(git remote get-url origin)"
+          echo "Git status:"
+          git status
+          
+          # Test if we can create a test commit
+          echo "# Test commit $(date)" >> README.md
+          git add README.md
+          git commit -m "test: testing permissions [skip ci]"
+          echo "✅ Successfully created test commit"
+          
+          # Test if we can create a test tag
+          git tag "test-permissions-$(date +%s)"
+          echo "✅ Successfully created test tag"
+          
+          # Clean up
+          git reset --hard HEAD~1
+          git tag -d "test-permissions-$(date +%s)"
+          echo "✅ Successfully cleaned up test changes"
+
+      - name: Test npm operations
+        run: |
+          echo "Testing npm permissions..."
+          npm --version
+          echo "✅ npm is accessible"
