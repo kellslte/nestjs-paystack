@@ -17,7 +17,7 @@ export abstract class BaseService {
 
   protected getHeaders(): Record<string, string> {
     return {
-      'Authorization': `Bearer ${this.options.secretKey}`,
+      Authorization: `Bearer ${this.options.secretKey}`,
       'Content-Type': 'application/json',
     };
   }
@@ -39,7 +39,7 @@ export abstract class BaseService {
         headers: this.getHeaders(),
         timeout: this.options.timeout,
       },
-      this.getRetryOptions()
+      this.getRetryOptions(),
     );
     return response.data;
   }
@@ -53,7 +53,7 @@ export abstract class BaseService {
         body: data,
         timeout: this.options.timeout,
       },
-      this.getRetryOptions()
+      this.getRetryOptions(),
     );
     return response.data;
   }
@@ -67,7 +67,7 @@ export abstract class BaseService {
         body: data,
         timeout: this.options.timeout,
       },
-      this.getRetryOptions()
+      this.getRetryOptions(),
     );
     return response.data;
   }
@@ -80,14 +80,14 @@ export abstract class BaseService {
         headers: this.getHeaders(),
         timeout: this.options.timeout,
       },
-      this.getRetryOptions()
+      this.getRetryOptions(),
     );
     return response.data;
   }
 
   private buildUrl(endpoint: string, params?: Record<string, any>): string {
     const url = new URL(`${this.getBaseUrl()}${endpoint}`);
-    
+
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -95,7 +95,7 @@ export abstract class BaseService {
         }
       });
     }
-    
+
     return url.toString();
   }
 }

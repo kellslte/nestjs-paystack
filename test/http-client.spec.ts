@@ -29,7 +29,7 @@ describe('HttpClient', () => {
     const mockOptions = {
       method: 'GET' as const,
       url: 'https://api.paystack.co/test',
-      headers: { 'Authorization': 'Bearer test' },
+      headers: { Authorization: 'Bearer test' },
       timeout: 30000,
     };
 
@@ -104,9 +104,9 @@ describe('HttpClient', () => {
 
       (global.fetch as jest.Mock).mockResolvedValue(mockErrorResponse);
 
-      await expect(httpClient.request(mockOptions, { ...mockRetryOptions, retries: 1 }))
-        .rejects
-        .toThrow(PaystackError);
+      await expect(
+        httpClient.request(mockOptions, { ...mockRetryOptions, retries: 1 }),
+      ).rejects.toThrow(PaystackError);
 
       expect(global.fetch).toHaveBeenCalledTimes(2); // Initial + 1 retry
     }, 10000);
@@ -122,9 +122,9 @@ describe('HttpClient', () => {
 
       (global.fetch as jest.Mock).mockResolvedValue(mockErrorResponse);
 
-      await expect(httpClient.request(mockOptions, mockRetryOptions))
-        .rejects
-        .toThrow(PaystackError);
+      await expect(httpClient.request(mockOptions, mockRetryOptions)).rejects.toThrow(
+        PaystackError,
+      );
 
       expect(global.fetch).toHaveBeenCalledTimes(1); // No retries
     });
@@ -145,9 +145,9 @@ describe('HttpClient', () => {
 
       (global.fetch as jest.Mock).mockResolvedValue(mockErrorResponse);
 
-      await expect(httpClient.request(mockOptions, customRetryOptions))
-        .rejects
-        .toThrow(PaystackError);
+      await expect(httpClient.request(mockOptions, customRetryOptions)).rejects.toThrow(
+        PaystackError,
+      );
 
       expect(customRetryOptions.shouldRetry).toHaveBeenCalled();
       expect(global.fetch).toHaveBeenCalledTimes(1); // No retries due to custom logic
@@ -205,7 +205,7 @@ describe('HttpClient', () => {
       const result = httpClient['parseHeaders'](mockHeaders as any);
       expect(result).toEqual({
         'content-type': 'application/json',
-        'authorization': 'Bearer test',
+        authorization: 'Bearer test',
       });
     });
   });
@@ -249,8 +249,12 @@ describe('HttpClient', () => {
         { status: 504, message: 'gateway timeout' },
       ];
 
-      retryableErrors.forEach(error => {
-        const result = httpClient['shouldRetry'](error as any, { retries: 1, retryDelay: 1000, maxRetryDelay: 5000 });
+      retryableErrors.forEach((error) => {
+        const result = httpClient['shouldRetry'](error as any, {
+          retries: 1,
+          retryDelay: 1000,
+          maxRetryDelay: 5000,
+        });
         expect(result).toBe(true);
       });
     });
@@ -265,9 +269,13 @@ describe('HttpClient', () => {
         'service unavailable',
       ];
 
-      retryableMessages.forEach(message => {
+      retryableMessages.forEach((message) => {
         const error = { status: 200, message };
-        const result = httpClient['shouldRetry'](error as any, { retries: 1, retryDelay: 1000, maxRetryDelay: 5000 });
+        const result = httpClient['shouldRetry'](error as any, {
+          retries: 1,
+          retryDelay: 1000,
+          maxRetryDelay: 5000,
+        });
         expect(result).toBe(true);
       });
     });
@@ -280,8 +288,12 @@ describe('HttpClient', () => {
         { status: 404, message: 'not found' },
       ];
 
-      nonRetryableErrors.forEach(error => {
-        const result = httpClient['shouldRetry'](error as any, { retries: 1, retryDelay: 1000, maxRetryDelay: 5000 });
+      nonRetryableErrors.forEach((error) => {
+        const result = httpClient['shouldRetry'](error as any, {
+          retries: 1,
+          retryDelay: 1000,
+          maxRetryDelay: 5000,
+        });
         expect(result).toBe(false);
       });
     });

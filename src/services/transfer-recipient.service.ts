@@ -8,7 +8,7 @@ import {
   ListTransferRecipientsResponse,
   PaystackModuleOptions,
   UpdateTransferRecipientRequest,
-  UpdateTransferRecipientResponse
+  UpdateTransferRecipientResponse,
 } from '../interfaces';
 
 export class TransferRecipientService extends BaseService {
@@ -16,11 +16,15 @@ export class TransferRecipientService extends BaseService {
     super(options);
   }
 
-  async create(data: CreateTransferRecipientRequest): Promise<CreateTransferRecipientResponse | any> {
+  async create(
+    data: CreateTransferRecipientRequest,
+  ): Promise<CreateTransferRecipientResponse | any> {
     return this.post<CreateTransferRecipientResponse>('/transferrecipient', data);
   }
 
-  async list(params?: ListTransferRecipientsRequest): Promise<ListTransferRecipientsResponse | any> {
+  async list(
+    params?: ListTransferRecipientsRequest,
+  ): Promise<ListTransferRecipientsResponse | any> {
     return this.get<ListTransferRecipientsResponse>('/transferrecipient', params);
   }
 
@@ -28,7 +32,10 @@ export class TransferRecipientService extends BaseService {
     return this.get<FetchTransferRecipientResponse>(`/transferrecipient/${idOrCode}`);
   }
 
-  async update(idOrCode: string | number, data: UpdateTransferRecipientRequest): Promise<UpdateTransferRecipientResponse | any> {
+  async update(
+    idOrCode: string | number,
+    data: UpdateTransferRecipientRequest,
+  ): Promise<UpdateTransferRecipientResponse | any> {
     return this.put<UpdateTransferRecipientResponse>(`/transferrecipient/${idOrCode}`, data);
   }
 

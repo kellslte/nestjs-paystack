@@ -1,15 +1,15 @@
 import { BaseService } from '../base.service';
-import { 
-  CreateCustomerRequest, 
-  CreateCustomerResponse, 
-  DeactivateAuthorizationResponse, 
-  FetchCustomerResponse, 
-  ListCustomersRequest, 
-  ListCustomersResponse, 
-  PaystackModuleOptions, 
-  UpdateCustomerRequest, 
-  UpdateCustomerResponse, 
-  ValidateCustomerResponse, 
+import {
+  CreateCustomerRequest,
+  CreateCustomerResponse,
+  DeactivateAuthorizationResponse,
+  FetchCustomerResponse,
+  ListCustomersRequest,
+  ListCustomersResponse,
+  PaystackModuleOptions,
+  UpdateCustomerRequest,
+  UpdateCustomerResponse,
+  ValidateCustomerResponse,
   ValidateCustomerRequest,
   SetRiskActionRequest,
   SetRiskActionResponse,
@@ -43,35 +43,49 @@ export class CustomerService extends BaseService {
   /**
    * Update a customer
    */
-  async update(idOrCode: string | number, data: UpdateCustomerRequest): Promise<UpdateCustomerResponse | any> {
+  async update(
+    idOrCode: string | number,
+    data: UpdateCustomerRequest,
+  ): Promise<UpdateCustomerResponse | any> {
     return this.put<UpdateCustomerResponse>(`/customer/${idOrCode}`, data);
   }
 
   /**
    * Validate a customer
    */
-  async validate(idOrCode: string | number, data: ValidateCustomerRequest): Promise<ValidateCustomerResponse | any> {
+  async validate(
+    idOrCode: string | number,
+    data: ValidateCustomerRequest,
+  ): Promise<ValidateCustomerResponse | any> {
     return this.post<ValidateCustomerResponse>(`/customer/${idOrCode}/identification`, data);
   }
 
   /**
    * Blacklist a customer
    */
-  async blacklist(idOrCode: string | number, data: SetRiskActionRequest): Promise<SetRiskActionResponse> {
+  async blacklist(
+    idOrCode: string | number,
+    data: SetRiskActionRequest,
+  ): Promise<SetRiskActionResponse> {
     return this.post<SetRiskActionResponse>(`/customer/set_risk_action`, data);
   }
 
   /**
    * Whitelist a customer
    */
-  async whitelist(idOrCode: string | number, data: SetRiskActionRequest): Promise<SetRiskActionResponse> {
+  async whitelist(
+    idOrCode: string | number,
+    data: SetRiskActionRequest,
+  ): Promise<SetRiskActionResponse> {
     return this.post<SetRiskActionResponse>(`/customer/set_risk_action`, data);
   }
 
   /**
    * Deactivate authorization
    */
-  async deactivateAuthorization(authorizationCode: string): Promise<DeactivateAuthorizationResponse | any> {
+  async deactivateAuthorization(
+    authorizationCode: string,
+  ): Promise<DeactivateAuthorizationResponse | any> {
     return this.post<DeactivateAuthorizationResponse>('/customer/deactivate_authorization', {
       authorization_code: authorizationCode,
     });

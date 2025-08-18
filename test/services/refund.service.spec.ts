@@ -25,7 +25,7 @@ describe('RefundService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.create(mockData);
@@ -40,7 +40,7 @@ describe('RefundService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.create(mockData);
@@ -52,15 +52,15 @@ describe('RefundService', () => {
 
   describe('list', () => {
     it('should call get with correct endpoint and params', async () => {
-      const params = { 
-        page: 1, 
-        perPage: 10, 
-        from: '2024-01-01', 
+      const params = {
+        page: 1,
+        perPage: 10,
+        from: '2024-01-01',
         to: '2024-01-31',
-        reference: 'REFUND_REF_123'
+        reference: 'REFUND_REF_123',
       };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list(params);
@@ -71,7 +71,7 @@ describe('RefundService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list();
@@ -85,7 +85,7 @@ describe('RefundService', () => {
     it('should call get with correct endpoint', async () => {
       const id = 123;
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(id);

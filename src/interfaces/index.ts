@@ -18,4 +18,4 @@ export * from './bank.interface';
 export * from './dispute.interface';
 export * from './refund.interface';
 export * from './verification.interface';
-export * from './balance.interface';        
+export * from './balance.interface';

@@ -1,17 +1,17 @@
 import { BaseService } from '../base.service';
-import { 
-  CreateSplitRequest, 
-  CreateSplitResponse, 
-  FetchSplitResponse, 
-  ListSplitsRequest, 
-  ListSplitsResponse, 
+import {
+  CreateSplitRequest,
+  CreateSplitResponse,
+  FetchSplitResponse,
+  ListSplitsRequest,
+  ListSplitsResponse,
   PaystackModuleOptions,
   UpdateSplitRequest,
   UpdateSplitResponse,
   AddSubaccountToSplitRequest,
   AddSubaccountToSplitResponse,
   RemoveSubaccountFromSplitRequest,
-  RemoveSubaccountFromSplitResponse
+  RemoveSubaccountFromSplitResponse,
 } from '../interfaces';
 
 export class SplitService extends BaseService {
@@ -31,15 +31,27 @@ export class SplitService extends BaseService {
     return this.get<FetchSplitResponse>(`/split/${idOrCode}`);
   }
 
-  async update(idOrCode: string | number, data: UpdateSplitRequest): Promise<UpdateSplitResponse | any> {
+  async update(
+    idOrCode: string | number,
+    data: UpdateSplitRequest,
+  ): Promise<UpdateSplitResponse | any> {
     return this.put<UpdateSplitResponse>(`/split/${idOrCode}`, data);
   }
 
-  async addSubaccount(idOrCode: string | number, data: AddSubaccountToSplitRequest): Promise<AddSubaccountToSplitResponse | any> {
+  async addSubaccount(
+    idOrCode: string | number,
+    data: AddSubaccountToSplitRequest,
+  ): Promise<AddSubaccountToSplitResponse | any> {
     return this.post<AddSubaccountToSplitResponse>(`/split/${idOrCode}/subaccount/add`, data);
   }
 
-  async removeSubaccount(idOrCode: string | number, data: RemoveSubaccountFromSplitRequest): Promise<RemoveSubaccountFromSplitResponse | any> {
-    return this.post<RemoveSubaccountFromSplitResponse>(`/split/${idOrCode}/subaccount/remove`, data);
+  async removeSubaccount(
+    idOrCode: string | number,
+    data: RemoveSubaccountFromSplitRequest,
+  ): Promise<RemoveSubaccountFromSplitResponse | any> {
+    return this.post<RemoveSubaccountFromSplitResponse>(
+      `/split/${idOrCode}/subaccount/remove`,
+      data,
+    );
   }
 }

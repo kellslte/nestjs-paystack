@@ -1,11 +1,11 @@
 import { BaseService } from '../base.service';
-import { 
-  CreateRefundRequest, 
-  CreateRefundResponse, 
-  FetchRefundResponse, 
-  ListRefundsRequest, 
-  ListRefundsResponse, 
-  PaystackModuleOptions 
+import {
+  CreateRefundRequest,
+  CreateRefundResponse,
+  FetchRefundResponse,
+  ListRefundsRequest,
+  ListRefundsResponse,
+  PaystackModuleOptions,
 } from '../interfaces';
 
 export class RefundService extends BaseService {

@@ -24,7 +24,7 @@ describe('SubscriptionService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.create(mockData);
@@ -38,7 +38,7 @@ describe('SubscriptionService', () => {
     it('should call get with correct endpoint and params', async () => {
       const params = { page: 1, perPage: 10, customer: 123 };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list(params);
@@ -49,7 +49,7 @@ describe('SubscriptionService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list();
@@ -63,7 +63,7 @@ describe('SubscriptionService', () => {
     it('should call get with correct endpoint', async () => {
       const id = 123;
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(id);
@@ -75,7 +75,7 @@ describe('SubscriptionService', () => {
     it('should handle string code', async () => {
       const code = 'SUB_123';
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(code);
@@ -94,7 +94,7 @@ describe('SubscriptionService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.activate(id, activationData);
@@ -108,7 +108,7 @@ describe('SubscriptionService', () => {
     it('should call post with correct endpoint', async () => {
       const id = 123;
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.cancel(id);

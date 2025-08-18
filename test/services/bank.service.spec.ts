@@ -23,7 +23,7 @@ describe('BankService', () => {
         pay_with_bank: true,
         gateway: 'emandate',
         type: 'nuban',
-        currency: 'NGN'
+        currency: 'NGN',
       };
       const mockResponse = { status: true, message: 'Success', data: [] };
 

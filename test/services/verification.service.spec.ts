@@ -21,16 +21,16 @@ describe('VerificationService', () => {
         account_code: '044',
       };
 
-      const mockResponse = { 
-        status: true, 
-        message: 'Success', 
+      const mockResponse = {
+        status: true,
+        message: 'Success',
         data: {
           account_number: '1234567890',
           account_name: 'John Doe',
           bank_id: 1,
-        }
+        },
       };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.verifyAccountNumber(accountData);
@@ -43,9 +43,9 @@ describe('VerificationService', () => {
   describe('verifyCardBin', () => {
     it('should call get with correct endpoint', async () => {
       const bin = '408408';
-      const mockResponse = { 
-        status: true, 
-        message: 'Success', 
+      const mockResponse = {
+        status: true,
+        message: 'Success',
         data: {
           bin: '408408',
           brand: 'visa',
@@ -55,9 +55,9 @@ describe('VerificationService', () => {
           card_type: 'DEBIT',
           bank: 'Test Bank',
           linked_bank_id: 1,
-        }
+        },
       };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.verifyCardBin(bin);
@@ -70,9 +70,9 @@ describe('VerificationService', () => {
   describe('verifyBVN', () => {
     it('should call get with correct endpoint', async () => {
       const bvn = '12345678901';
-      const mockResponse = { 
-        status: true, 
-        message: 'Success', 
+      const mockResponse = {
+        status: true,
+        message: 'Success',
         data: {
           bvn: '12345678901',
           first_name: 'John',
@@ -83,9 +83,9 @@ describe('VerificationService', () => {
           enrollment_bank: 'Test Bank',
           enrollment_branch: 'Test Branch',
           image: null,
-        }
+        },
       };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.verifyBVN(bvn);

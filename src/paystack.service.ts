@@ -35,9 +35,7 @@ export class PaystackService {
   public readonly settlement: SettlementService;
   public readonly plan: PlanService;
 
-  constructor(
-    @Inject(PAYSTACK_MODULE_OPTIONS) private readonly options: PaystackModuleOptions,
-  ) {
+  constructor(@Inject(PAYSTACK_MODULE_OPTIONS) private readonly options: PaystackModuleOptions) {
     this.transaction = new TransactionService(this.options);
     this.customer = new CustomerService(this.options);
     this.bank = new BankService(this.options);

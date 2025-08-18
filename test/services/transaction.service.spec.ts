@@ -23,7 +23,7 @@ describe('TransactionService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       // Mock the post method
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
@@ -38,7 +38,7 @@ describe('TransactionService', () => {
     it('should call get with correct endpoint', async () => {
       const reference = 'test-reference';
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.verify(reference);
@@ -52,7 +52,7 @@ describe('TransactionService', () => {
     it('should call get with correct endpoint and params', async () => {
       const params = { page: 1, perPage: 10 };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list(params);
@@ -63,7 +63,7 @@ describe('TransactionService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list();

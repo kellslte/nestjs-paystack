@@ -67,7 +67,7 @@ describe('BaseService', () => {
       const headers = service['getHeaders']();
 
       expect(headers).toEqual({
-        'Authorization': 'Bearer test-secret-key',
+        Authorization: 'Bearer test-secret-key',
         'Content-Type': 'application/json',
       });
     });
@@ -105,7 +105,7 @@ describe('BaseService', () => {
         status: 200,
         statusText: 'OK',
         headers: {},
-        data: { success: true }
+        data: { success: true },
       };
       mockHttpClient.request.mockResolvedValue(mockResponse);
 
@@ -116,7 +116,7 @@ describe('BaseService', () => {
           method: 'GET',
           url: 'https://api.paystack.co/test?param=value',
           headers: {
-            'Authorization': 'Bearer test-secret-key',
+            Authorization: 'Bearer test-secret-key',
             'Content-Type': 'application/json',
           },
           timeout: 30000,
@@ -125,7 +125,7 @@ describe('BaseService', () => {
           retries: 3,
           retryDelay: 1000,
           maxRetryDelay: 10000,
-        }
+        },
       );
       expect(result).toEqual(mockResponse.data);
     });
@@ -135,7 +135,7 @@ describe('BaseService', () => {
         status: 200,
         statusText: 'OK',
         headers: {},
-        data: { success: true }
+        data: { success: true },
       };
       mockHttpClient.request.mockResolvedValue(mockResponse);
 
@@ -143,14 +143,14 @@ describe('BaseService', () => {
         param1: 'value1',
         param2: 'value2',
         param3: undefined,
-        param4: null
+        param4: null,
       });
 
       expect(mockHttpClient.request).toHaveBeenCalledWith(
         expect.objectContaining({
           url: 'https://api.paystack.co/test?param1=value1&param2=value2',
         }),
-        expect.any(Object)
+        expect.any(Object),
       );
     });
   });
@@ -161,7 +161,7 @@ describe('BaseService', () => {
         status: 200,
         statusText: 'OK',
         headers: {},
-        data: { success: true }
+        data: { success: true },
       };
       mockHttpClient.request.mockResolvedValue(mockResponse);
 
@@ -173,7 +173,7 @@ describe('BaseService', () => {
           method: 'POST',
           url: 'https://api.paystack.co/test',
           headers: {
-            'Authorization': 'Bearer test-secret-key',
+            Authorization: 'Bearer test-secret-key',
             'Content-Type': 'application/json',
           },
           body: postData,
@@ -183,7 +183,7 @@ describe('BaseService', () => {
           retries: 3,
           retryDelay: 1000,
           maxRetryDelay: 10000,
-        }
+        },
       );
       expect(result).toEqual(mockResponse.data);
     });
@@ -195,7 +195,7 @@ describe('BaseService', () => {
         status: 200,
         statusText: 'OK',
         headers: {},
-        data: { success: true }
+        data: { success: true },
       };
       mockHttpClient.request.mockResolvedValue(mockResponse);
 
@@ -207,7 +207,7 @@ describe('BaseService', () => {
           method: 'PUT',
           url: 'https://api.paystack.co/test',
           headers: {
-            'Authorization': 'Bearer test-secret-key',
+            Authorization: 'Bearer test-secret-key',
             'Content-Type': 'application/json',
           },
           body: putData,
@@ -217,7 +217,7 @@ describe('BaseService', () => {
           retries: 3,
           retryDelay: 1000,
           maxRetryDelay: 10000,
-        }
+        },
       );
       expect(result).toEqual(mockResponse.data);
     });
@@ -229,7 +229,7 @@ describe('BaseService', () => {
         status: 200,
         statusText: 'OK',
         headers: {},
-        data: { success: true }
+        data: { success: true },
       };
       mockHttpClient.request.mockResolvedValue(mockResponse);
 
@@ -240,7 +240,7 @@ describe('BaseService', () => {
           method: 'DELETE',
           url: 'https://api.paystack.co/test',
           headers: {
-            'Authorization': 'Bearer test-secret-key',
+            Authorization: 'Bearer test-secret-key',
             'Content-Type': 'application/json',
           },
           timeout: 30000,
@@ -249,7 +249,7 @@ describe('BaseService', () => {
           retries: 3,
           retryDelay: 1000,
           maxRetryDelay: 10000,
-        }
+        },
       );
       expect(result).toEqual(mockResponse.data);
     });

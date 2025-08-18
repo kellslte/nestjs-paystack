@@ -25,7 +25,7 @@ describe('PlanService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.create(mockData);
@@ -39,7 +39,7 @@ describe('PlanService', () => {
     it('should call get with correct endpoint and params', async () => {
       const params = { page: 1, perPage: 10, status: 'active' };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list(params);
@@ -50,7 +50,7 @@ describe('PlanService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list();
@@ -64,7 +64,7 @@ describe('PlanService', () => {
     it('should call get with correct endpoint', async () => {
       const id = 123;
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(id);
@@ -76,7 +76,7 @@ describe('PlanService', () => {
     it('should handle string code', async () => {
       const code = 'PLAN_123';
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(code);
@@ -96,7 +96,7 @@ describe('PlanService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'put').mockResolvedValue(mockResponse);
 
       const result = await service.update(id, updateData);

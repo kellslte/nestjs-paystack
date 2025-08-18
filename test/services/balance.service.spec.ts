@@ -16,19 +16,19 @@ describe('BalanceService', () => {
 
   describe('check', () => {
     it('should call get with correct endpoint', async () => {
-      const mockResponse = { 
-        status: true, 
-        message: 'Success', 
+      const mockResponse = {
+        status: true,
+        message: 'Success',
         data: [
           {
             currency: 'NGN',
             balance: 10000,
             available_balance: 9500,
             ledger_balance: 10000,
-          }
-        ] 
+          },
+        ],
       };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.check();
@@ -42,7 +42,7 @@ describe('BalanceService', () => {
     it('should call get with correct endpoint and params', async () => {
       const params = { page: 1, perPage: 10, from: '2024-01-01', to: '2024-01-31' };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.listLedger(params);
@@ -53,7 +53,7 @@ describe('BalanceService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.listLedger();

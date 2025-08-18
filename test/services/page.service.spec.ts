@@ -33,7 +33,7 @@ describe('PageService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'post').mockResolvedValue(mockResponse);
 
       const result = await service.create(mockData);
@@ -47,7 +47,7 @@ describe('PageService', () => {
     it('should call get with correct endpoint and params', async () => {
       const params = { page: 1, perPage: 10, active: true };
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list(params);
@@ -58,7 +58,7 @@ describe('PageService', () => {
 
     it('should call get without params when none provided', async () => {
       const mockResponse = { status: true, message: 'Success', data: [] };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.list();
@@ -72,7 +72,7 @@ describe('PageService', () => {
     it('should call get with correct endpoint for numeric id', async () => {
       const id = 123;
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(id);
@@ -84,7 +84,7 @@ describe('PageService', () => {
     it('should handle string slug', async () => {
       const slug = 'test-page';
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.fetch(slug);
@@ -106,7 +106,7 @@ describe('PageService', () => {
       };
 
       const mockResponse = { status: true, message: 'Success', data: {} };
-      
+
       jest.spyOn(service as any, 'put').mockResolvedValue(mockResponse);
 
       const result = await service.update(id, updateData);
@@ -120,7 +120,7 @@ describe('PageService', () => {
     it('should call get with correct endpoint', async () => {
       const slug = 'test-page';
       const mockResponse = { status: true, message: 'Success', data: { available: true } };
-      
+
       jest.spyOn(service as any, 'get').mockResolvedValue(mockResponse);
 
       const result = await service.checkSlug(slug);

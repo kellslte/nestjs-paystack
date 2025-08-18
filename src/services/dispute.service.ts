@@ -1,12 +1,12 @@
 import { BaseService } from '../base.service';
-import { 
-  AddEvidenceRequest, 
-  AddEvidenceResponse, 
-  FetchDisputeResponse, 
-  ListDisputesRequest, 
-  ListDisputesResponse, 
-  PaystackModuleOptions, 
-  UpdateDisputeRequest, 
+import {
+  AddEvidenceRequest,
+  AddEvidenceResponse,
+  FetchDisputeResponse,
+  ListDisputesRequest,
+  ListDisputesResponse,
+  PaystackModuleOptions,
+  UpdateDisputeRequest,
   UpdateDisputeResponse,
   UploadEvidenceRequest,
   UploadEvidenceResponse,
@@ -33,7 +33,10 @@ export class DisputeService extends BaseService {
     return this.post<AddEvidenceResponse>(`/dispute/${id}/evidence`, data);
   }
 
-  async uploadEvidence(id: number, data: UploadEvidenceRequest): Promise<UploadEvidenceResponse | any> {
+  async uploadEvidence(
+    id: number,
+    data: UploadEvidenceRequest,
+  ): Promise<UploadEvidenceResponse | any> {
     return this.post<UploadEvidenceResponse>(`/dispute/${id}/evidence/upload`, data);
   }
 }

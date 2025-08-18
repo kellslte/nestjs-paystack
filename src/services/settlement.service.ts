@@ -3,7 +3,7 @@ import {
   FetchSettlementResponse,
   ListSettlementsRequest,
   ListSettlementsResponse,
-  PaystackModuleOptions
+  PaystackModuleOptions,
 } from '../interfaces';
 
 export class SettlementService extends BaseService {

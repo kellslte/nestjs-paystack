@@ -37,10 +37,7 @@ export class TransferService extends BaseService {
     return this.get<any>(`/transfer/${idOrCode}`);
   }
 
-  async finalize(data: {
-    transfer_code: string;
-    otp: string;
-  }): Promise<any> {
+  async finalize(data: { transfer_code: string; otp: string }): Promise<any> {
     return this.post<any>('/transfer/finalize_transfer', data);
   }
 
