@@ -1,6 +1,6 @@
 # Version Bumping Guide
 
-This document explains how to use the automated version bumping system for the @nestjs/paystack package.
+This document explains how to use the automated version bumping system for the @scwar/nestjs-paystack package.
 
 ## Overview
 

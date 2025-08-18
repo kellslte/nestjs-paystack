@@ -1,4 +1,4 @@
-# @nestjs/paystack
+# @scwar/nestjs-paystack
 
 A comprehensive NestJS module for integrating with the Paystack API. This package provides a complete wrapper around all Paystack API endpoints with robust error handling, retries, and TypeScript support.
 
@@ -15,7 +15,7 @@ A comprehensive NestJS module for integrating with the Paystack API. This packag
 ## Installation
 
 ```bash
-npm install @nestjs/paystack
+npm install @scwar/nestjs-paystack
 ```
 
 ## Quick Start
@@ -23,7 +23,7 @@ npm install @nestjs/paystack
 ### 1. Import the module
 
 ```typescript
-import { PaystackModule } from '@nestjs/paystack';
+import { PaystackModule } from '@scwar/nestjs-paystack';
 
 @Module({
   imports: [
@@ -41,7 +41,7 @@ export class AppModule {}
 ### 2. Inject and use the service
 
 ```typescript
-import { PaystackService } from '@nestjs/paystack';
+import { PaystackService } from '@scwar/nestjs-paystack';
 
 @Injectable()
 export class PaymentService {

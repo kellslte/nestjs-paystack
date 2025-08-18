@@ -105,7 +105,7 @@ jobs:
             ## Installation
 
             ```bash
-            npm install @nestjs/paystack@${{ steps.version.outputs.version }}
+            npm install @scwar/nestjs-paystack@${{ steps.version.outputs.version }}
             ```
 
             ## Breaking Changes

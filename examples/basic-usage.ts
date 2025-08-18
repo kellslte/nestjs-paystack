@@ -1,4 +1,4 @@
-import { PaystackModule } from '@nestjs/paystack';
+import { PaystackModule } from '@scwar/nestjs-paystack';
 import { Module } from '@nestjs/common';
 
 // Example 1: Basic Module Configuration
@@ -32,7 +32,7 @@ export class BasicPaystackModule {}
 export class AsyncPaystackModule {}
 
 // Example 3: Service Usage
-import { PaystackService } from '@nestjs/paystack';
+import { PaystackService } from '@scwar/nestjs-paystack';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

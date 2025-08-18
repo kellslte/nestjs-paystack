@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-01-01
 
 ### Added
-- Initial release of @nestjs/paystack package
+- Initial release of @scwar/nestjs-paystack package
 - Complete Paystack API coverage with all endpoints
 - Transaction service with full CRUD operations
 - Customer service for customer management
