@@ -1,6 +1,6 @@
 export interface VerifyAccountNumberRequest {
   account_number: string;
-  account_code: string;
+  bank_code: string;
 }
 
 export interface VerifyAccountNumberResponse {
