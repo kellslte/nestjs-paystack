@@ -61,6 +61,23 @@ jobs:
         run: |
           echo "${{ steps.release-check.outputs.reason }}"
 
+      - name: Verify npm authentication
+        if: steps.release-check.outputs.should_publish == 'true'
+        run: |
+          NPM_USER=$(npm whoami)
+          PACKAGE_NAME="${{ steps.package.outputs.name }}"
+
+          echo "Authenticated to npm as: $NPM_USER"
+
+          if [[ "$PACKAGE_NAME" == @*/* ]]; then
+            PACKAGE_SCOPE="${PACKAGE_NAME#@}"
+            PACKAGE_SCOPE="${PACKAGE_SCOPE%%/*}"
+            echo "Preparing to publish scoped package under: @$PACKAGE_SCOPE"
+            echo "If publish fails with E404, ensure this npm user can publish to the @$PACKAGE_SCOPE scope."
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Run linting
         if: steps.release-check.outputs.should_publish == 'true'
         run: npm run lint
@@ -89,7 +106,28 @@ jobs:
 
       - name: Publish to npm
         if: steps.release-check.outputs.should_publish == 'true'
-        run: npm publish --provenance --access public
+        run: |
+          set +e
+          PUBLISH_OUTPUT=$(npm publish --provenance --access public 2>&1)
+          PUBLISH_EXIT_CODE=$?
+          set -e
+
+          echo "$PUBLISH_OUTPUT"
+
+          if [ "$PUBLISH_EXIT_CODE" -ne 0 ]; then
+            PACKAGE_NAME="${{ steps.package.outputs.name }}"
+
+            if echo "$PUBLISH_OUTPUT" | grep -q "npm error code E404" && [[ "$PACKAGE_NAME" == @*/* ]]; then
+              PACKAGE_SCOPE="${PACKAGE_NAME#@}"
+              PACKAGE_SCOPE="${PACKAGE_SCOPE%%/*}"
+
+              echo "::error::npm rejected the publish for $PACKAGE_NAME."
+              echo "::error::This usually means the NPM_TOKEN cannot publish to the @$PACKAGE_SCOPE scope, or that scope has not been created on npm yet."
+              echo "::error::Use a token from an npm user who owns @$PACKAGE_SCOPE or is a member of the @$PACKAGE_SCOPE org with publish rights."
+            fi
+
+            exit "$PUBLISH_EXIT_CODE"
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
