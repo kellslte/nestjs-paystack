@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update main and types paths in package.json to reflect new directory structure
 
 
+## [1.0.6] - 2026-04-04
+
+
+## [1.0.5] - 2026-04-04
+
+
 ## [1.0.3] - 2025-08-19
 
 ### Bug Fixes

@@ -18,7 +18,7 @@ describe('VerificationService', () => {
     it('should call get with correct endpoint and params', async () => {
       const accountData = {
         account_number: '1234567890',
-        account_code: '044',
+        bank_code: '044',
       };
 
       const mockResponse = {
