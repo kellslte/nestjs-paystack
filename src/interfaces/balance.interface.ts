@@ -1,6 +1,7 @@
-export interface CheckBalanceRequest {
-  // No parameters needed for balance check
-}
+/**
+ * No parameters are needed for balance check requests.
+ */
+export type CheckBalanceRequest = Record<string, never>;
 
 export interface CheckBalanceResponse {
   status: boolean;

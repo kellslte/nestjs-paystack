@@ -182,9 +182,7 @@ export interface PaystackWebhookEvent<T = unknown> {
 /**
  * Generic webhook event with a known Paystack event name.
  */
-export interface TypedPaystackWebhookEvent<
-  T = unknown,
-> extends PaystackWebhookEvent<T> {
+export interface TypedPaystackWebhookEvent<T = unknown> extends PaystackWebhookEvent<T> {
   event: PaystackWebhookEventName;
 }
 

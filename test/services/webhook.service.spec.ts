@@ -107,9 +107,7 @@ describe('WebhookService', () => {
     });
 
     it('should throw an error for invalid JSON', () => {
-      expect(() => service.parse('not-json')).toThrow(
-        'Unable to parse Paystack webhook payload',
-      );
+      expect(() => service.parse('not-json')).toThrow('Unable to parse Paystack webhook payload');
     });
 
     it('should throw an error for a JSON payload without an event field', () => {

@@ -48,6 +48,10 @@
     "url": "https://github.com/kellslte/nestjs-paystack/issues"
   },
   "homepage": "https://github.com/kellslte/nestjs-paystack#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "peerDependencies": {
     "@nestjs/common": "^10.0.0 || ^11.0.0",
     "@nestjs/core": "^10.0.0 || ^11.0.0",

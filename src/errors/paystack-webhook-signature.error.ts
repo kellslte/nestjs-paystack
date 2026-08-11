@@ -6,9 +6,6 @@ export class PaystackWebhookSignatureError extends Error {
 
     this.name = 'PaystackWebhookSignatureError';
 
-    Object.setPrototypeOf(
-      this,
-      PaystackWebhookSignatureError.prototype,
-    );
+    Object.setPrototypeOf(this, PaystackWebhookSignatureError.prototype);
   }
 }
