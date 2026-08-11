@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - update main and types paths in package.json to reflect new directory structure
 
 
+## [1.2.0] - 2026-08-11
+
+### Features
+- enhance webhook service and update configuration for npm publishing
+
+
 ## [1.1.1] - 2026-08-11
 
 ### Chores
