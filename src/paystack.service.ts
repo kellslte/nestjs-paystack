@@ -16,6 +16,7 @@ import { SubscriptionService } from './services/subscription.service';
 import { SplitService } from './services/split.service';
 import { SettlementService } from './services/settlement.service';
 import { PlanService } from './services/plan.service';
+import { WebhookService } from './services/webhook.service';
 
 @Injectable()
 export class PaystackService {
@@ -34,6 +35,7 @@ export class PaystackService {
   public readonly split: SplitService;
   public readonly settlement: SettlementService;
   public readonly plan: PlanService;
+  public readonly webhook: WebhookService;
 
   constructor(@Inject(PAYSTACK_MODULE_OPTIONS) private readonly options: PaystackModuleOptions) {
     this.transaction = new TransactionService(this.options);
@@ -51,6 +53,7 @@ export class PaystackService {
     this.split = new SplitService(this.options);
     this.settlement = new SettlementService(this.options);
     this.plan = new PlanService(this.options);
+    this.webhook = new WebhookService(this.options);
   }
 
   /**

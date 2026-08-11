@@ -18,6 +18,7 @@ export { ChargeService } from './services/charge.service';
 export { DisputeService } from './services/dispute.service';
 export { RefundService } from './services/refund.service';
 export { VerificationService } from './services/verification.service';
+export { WebhookService } from './services/webhook.service';
 
 // Interface exports
 export * from './interfaces';
@@ -25,3 +26,4 @@ export * from './types';
 
 // Error exports
 export { PaystackError } from './errors/paystack.error';
+export { PaystackWebhookSignatureError } from './errors/paystack-webhook-signature.error';

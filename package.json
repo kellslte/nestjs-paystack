@@ -58,7 +58,7 @@
     "@nestjs/core": "^11.0.0",
     "@nestjs/testing": "^11.0.0",
     "@types/jest": "^29.5.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.19.43",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "conventional-changelog-cli": "^4.1.0",

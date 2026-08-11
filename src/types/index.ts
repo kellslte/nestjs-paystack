@@ -134,3 +134,103 @@ export interface PaystackPaginationMeta {
 export interface PaystackPaginatedResponse<T = any> extends PaystackResponse<T[]> {
   meta: PaystackPaginationMeta;
 }
+
+// Webhook Types
+/**
+ * Paystack webhook event names.
+ *
+ * This union intentionally contains the events currently documented
+ * by Paystack. The generic PaystackWebhookEvent interface still allows
+ * consumers to handle future/unknown events.
+ */
+export type PaystackWebhookEventName =
+  | 'charge.dispute.create'
+  | 'charge.dispute.remind'
+  | 'charge.dispute.resolve'
+  | 'charge.success'
+  | 'customeridentification.failed'
+  | 'customeridentification.success'
+  | 'dedicatedaccount.assign.failed'
+  | 'dedicatedaccount.assign.success'
+  | 'invoice.create'
+  | 'invoice.payment_failed'
+  | 'invoice.update'
+  | 'paymentrequest.pending'
+  | 'paymentrequest.success'
+  | 'refund.failed'
+  | 'refund.pending'
+  | 'refund.processed'
+  | 'refund.processing'
+  | 'subscription.create'
+  | 'subscription.disable'
+  | 'subscription.expiring_cards'
+  | 'subscription.not_renew'
+  | 'transfer.failed'
+  | 'transfer.success'
+  | 'transfer.reversed';
+
+/**
+ * Generic Paystack webhook envelope.
+ *
+ * T is the shape of the event's data property.
+ */
+export interface PaystackWebhookEvent<T = unknown> {
+  event: string;
+  data: T;
+}
+
+/**
+ * Generic webhook event with a known Paystack event name.
+ */
+export interface TypedPaystackWebhookEvent<
+  T = unknown,
+> extends PaystackWebhookEvent<T> {
+  event: PaystackWebhookEventName;
+}
+
+/**
+ * Data commonly returned by charge.success.
+ *
+ * Paystack can add fields to this object over time, so this interface
+ * intentionally does not attempt to model every nested property.
+ */
+export interface PaystackChargeSuccessData {
+  id: number;
+  domain: string;
+  status: string;
+  reference: string;
+  amount: number;
+  message: string | null;
+  gateway_response: string;
+  paid_at: string;
+  created_at: string;
+  channel: string;
+  currency: string;
+  ip_address?: string | null;
+  metadata?: Record<string, unknown> | null;
+
+  [key: string]: unknown;
+}
+
+export type PaystackChargeSuccessEvent = TypedPaystackWebhookEvent<PaystackChargeSuccessData>;
+
+/**
+ * Generic transaction webhook data.
+ *
+ * This is useful for consumers who don't want to depend on the
+ * more specific charge.success type.
+ */
+export interface PaystackTransactionWebhookData {
+  id?: number;
+  domain?: string;
+  status?: string;
+  reference?: string;
+  amount?: number;
+  currency?: string;
+  paid_at?: string | null;
+  created_at?: string;
+  channel?: string;
+  metadata?: Record<string, unknown> | null;
+
+  [key: string]: unknown;
+}

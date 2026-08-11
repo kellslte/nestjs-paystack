@@ -38,6 +38,7 @@ describe('PaystackService', () => {
     expect(service.dispute).toBeDefined();
     expect(service.refund).toBeDefined();
     expect(service.verification).toBeDefined();
+    expect(service.webhook).toBeDefined();
   });
 
   it('should return configuration', () => {

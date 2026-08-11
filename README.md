@@ -57,6 +57,24 @@ export class PaymentService {
 }
 ```
 
+### Webhook usage example
+
+```typescript
+import { PaystackService } from '@scwar/nestjs-paystack';
+
+@Injectable()
+export class WebhookHandlerService {
+  constructor(private readonly paystackService: PaystackService) {}
+
+  handleWebhook(payload: string, signature: string) {
+    return this.paystackService.webhook.verifyAndParse({
+      payload,
+      signature,
+    });
+  }
+}
+```
+
 ## Configuration Options
 
 ```typescript
@@ -139,6 +157,12 @@ interface PaystackModuleOptions {
 ### Balance Service
 - Check balance
 - List ledger
+
+### Webhook Service
+- Generate webhook signature
+- Verify webhook signature
+- Verify and parse webhook event
+- Parse webhook payload
 
 ### Bank Service
 - List banks

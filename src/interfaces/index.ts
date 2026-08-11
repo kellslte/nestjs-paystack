@@ -19,3 +19,4 @@ export * from './dispute.interface';
 export * from './refund.interface';
 export * from './verification.interface';
 export * from './balance.interface';
+export * from './webhook.interface';
